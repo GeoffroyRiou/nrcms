@@ -1,0 +1,26 @@
+{
+    "name": "geoffroyriou/nr-cms",
+    "description": "A package that adds CMS functionalities to a Laravel/Filament project",
+    "type": "package",
+    "version": "1.0.0",
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^12",
+        "illuminate/console": "^12",
+        "laravel/framework": "^12",
+        "filament/filament": "^3.2"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "GeoffroyRiou\\NrCMS\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Geoffroy Riou",
+            "email": "geoffroy.riou.pro@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
