@@ -8,6 +8,5 @@ return [
      * From app_path()
      */
     'blocks' => [
-        'App\\Blocks',
     ]
 ];
