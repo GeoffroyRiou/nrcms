@@ -10,6 +10,7 @@ class NrCMSServiceProvider extends ServiceProvider{
 
     public function boot(): void
     {
+
         /**
          * Configuration
          */
@@ -20,5 +21,13 @@ class NrCMSServiceProvider extends ServiceProvider{
             __DIR__ . '/../config/nrcms.php',
             'nrcms'
         );
+        
+        /**
+         * Publish views
+         */
+        $this->publishes([
+            __DIR__ . '/../resources/views' => resource_path('views'),
+        ], 'nrcms-views');
+    
     }
 }
