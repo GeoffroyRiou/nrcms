@@ -36,5 +36,10 @@ class NrCMSServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../components' => resource_path('views/components'),
         ], 'nrcms');
+
+        /**
+         * Routes
+         */
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
     }
 }

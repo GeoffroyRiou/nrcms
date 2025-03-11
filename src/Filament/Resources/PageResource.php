@@ -1,8 +1,8 @@
 <?php
 
-namespace GeoffroyRiou\NrCMS\Resources;
+namespace GeoffroyRiou\NrCMS\Filament\Resources;
 
-use GeoffroyRiou\NrCMS\Resources\PageResource\Pages;
+use GeoffroyRiou\NrCMS\Filament\Resources\PageResource\Pages;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;

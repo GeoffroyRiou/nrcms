@@ -9,5 +9,11 @@ return [
      */
     'blocks' => [
         //"App\\Blocks"
-    ]
+    ],
+
+    /**
+     * Page url prefix
+     * ex: "pages"
+     */
+    'page_url_prefix' => 'pages',
 ];
