@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 return [
     /**
-     * Path to the custom page builder blocks directory
-     * From app_path()
+     * Namespace of the custom page builder blocks 
+     * ex: "App\\Blocks"
      */
     'blocks' => [
+        //"App\\Blocks"
     ]
 ];

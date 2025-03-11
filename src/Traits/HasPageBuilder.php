@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GeoffroyRiou\NrCMS\Traits;
 
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use GeoffroyRiou\NrCMS\Fields\PageBuilder;
 
@@ -19,8 +20,10 @@ trait HasPageBuilder
                 array_merge(
                     self::getResourceFields(),
                     [
-                        PageBuilder::make('content')
+                        Section::make('Page Builder')->schema([
+                            PageBuilder::make('page_blocks')
                             ->columnSpanFull()
+                        ])
                     ]
                 )
             );

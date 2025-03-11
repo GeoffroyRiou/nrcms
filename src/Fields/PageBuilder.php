@@ -25,7 +25,10 @@ class PageBuilder extends Builder
             ->addActionLabel(__('Add a block'))
             ->blockNumbers(false)
             ->blockPickerColumns(3)
-            ->schema($this->loadBlocksSchema());
+            ->schema($this->loadBlocksSchema())
+            ->collapsible()
+            ->cloneable()
+            ->collapsed();
     }
 
     protected function loadBlocksSchema(): array

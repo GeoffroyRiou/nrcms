@@ -9,7 +9,7 @@ class RichContentBlock
 {
     public static function make(): Block
     {
-        return Block::make('nrcms.blocks.rich_content')
+        return Block::make('page-builder.rich_content')
             ->label(__('Rich Content'))
             ->icon('heroicon-o-newspaper')
             ->schema([
