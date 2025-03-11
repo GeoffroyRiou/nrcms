@@ -2,6 +2,7 @@
 
 namespace GeoffroyRiou\NrCMS\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
@@ -17,4 +18,12 @@ class Page extends Model
     protected $casts = [
         'page_blocks' => 'array',
     ];
+
+    /**
+     * Scope a query to only include published pages.
+     */
+    public function scopePublished(Builder $query): void
+    {
+        $query->where('published', true);
+    }
 }
