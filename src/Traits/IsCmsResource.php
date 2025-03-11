@@ -8,7 +8,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use GeoffroyRiou\NrCMS\Fields\PageBuilder;
 
-trait HasPageBuilder
+trait IsCmsResource
 {
 
     abstract protected static function getResourceFields(): array;
@@ -22,7 +22,7 @@ trait HasPageBuilder
                     [
                         Section::make('Page Builder')->schema([
                             PageBuilder::make('page_blocks')
-                            ->columnSpanFull()
+                                ->columnSpanFull()
                         ])
                     ]
                 )
