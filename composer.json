@@ -1,5 +1,5 @@
 {
-    "name": "geoffroyriou/nr-cms",
+    "name": "geoffroyriou/nrcms",
     "description": "A package that adds CMS functionalities to a Laravel/Filament project",
     "type": "package",
     "version": "1.0.0",
