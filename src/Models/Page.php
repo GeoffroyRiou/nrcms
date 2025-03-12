@@ -2,12 +2,14 @@
 
 namespace GeoffroyRiou\NrCMS\Models;
 
+use GeoffroyRiou\NrCMS\Traits\Menuable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Page extends Model
 {
+    use Menuable;
 
     protected $fillable = [
         'title',
@@ -21,6 +23,13 @@ class Page extends Model
     protected $casts = [
         'page_blocks' => 'array',
     ];
+
+    /**
+     * Get the URL for the page.
+     */
+    public function getUrl(): string{
+        return route('nrcms.page', ['slug' => $this->slug]);
+    }
 
     /**
      * Scope a query to only include published pages.
