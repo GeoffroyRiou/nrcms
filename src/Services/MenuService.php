@@ -35,9 +35,16 @@ class MenuService
                     // Check if the class uses the Menuable trait
                     $traits = $reflection->getTraits();
                     if (array_key_exists(Menuable::class, $traits)) {
-                        $models[$className::getModelLabel() ?? 'Page'] = $className::all()
-                            ->pluck($className::getLabelKey() ?? 'title', 'id')
-                            ->toArray();
+
+                        $items = $className::all()->map(function ($item) use ($className) {
+                            return [
+                                'key' => $className.':'.$item->id,
+                                'value' => $item->{$className::getLabelKey()},
+                            ];
+                        });
+                        $models = array_merge($models, $items
+                        ->pluck('value', 'key')
+                        ->toArray());
                     }
                 }
             }
