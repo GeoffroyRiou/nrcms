@@ -2,12 +2,14 @@
 
 namespace GeoffroyRiou\NrCMS\Filament\Resources;
 
+use Dom\Text;
 use Filament\Forms\Components\TextInput;
 use GeoffroyRiou\NrCMS\Filament\Resources\MenuResource\Pages;
 
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use GeoffroyRiou\NrCMS\Models\Menu;
 use Saade\FilamentAdjacencyList\Forms\Components\AdjacencyList;
@@ -16,7 +18,7 @@ class MenuResource extends Resource
 {
     protected static ?string $model = Menu::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-list-bullet';
 
     public static function form(Form $form): Form
     {
@@ -45,13 +47,15 @@ class MenuResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('title')
+                    ->label(__('Title'))
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
