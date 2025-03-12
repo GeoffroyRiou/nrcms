@@ -9,6 +9,7 @@ trait Menuable
     public static function getModelLabel(): string{
         return __('Page');
     }
+    
     public static function getLabelKey(): string{
         return 'title';
     }

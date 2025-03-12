@@ -29,9 +29,7 @@ class MenuResource extends Resource
     {
         $menuService = app()->make(MenuService::class);
         $menu = $menuService->getMenuFromId(1);
-        if($menu) {
-            //dd($menuService->hydrateMenu($menu->items));
-        }
+
         return $form
             ->schema([
                 TextInput::make('title')
