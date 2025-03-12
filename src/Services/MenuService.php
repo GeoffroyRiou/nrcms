@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace GeoffroyRiou\NrCMS\Services;
 
-use GeoffroyRiou\NrCMS\Models\Menu;
-use ReflectionClass;
-use Illuminate\Support\Str;
 use GeoffroyRiou\NrCMS\Traits\Menuable;
 
 class MenuService
 {
+    protected array $modelPaths;
+
+    public function __construct(protected ReflectionService $reflectionService)
+    {
+        $defaultPaths = config('nrcms.model_paths', []);
+        $this->modelPaths = array_merge($defaultPaths, [__DIR__ . '/../Models']);
+    }
 
     /**
      * Get all models that implement the Menuable interface
@@ -18,61 +22,42 @@ class MenuService
     public function getMenuableModels(): array
     {
         $models = [];
-        $modelPaths = [
-            app_path('Models'),
-            __DIR__ . '/../Models',
-        ]; // Adjust the path if your models are in a different directory
 
-        foreach ($modelPaths as $modelPath) {
-            // Scan the models directory for all PHP files
-            foreach (glob($modelPath . '/*.php') as $file) {
-
-                $namespace = $this->extractNamespace($file);
-                $className = $namespace . '\\' . basename($file, '.php');
-
-                if (class_exists($className)) {
-                    $reflection = new ReflectionClass($className);
-                    // Check if the class uses the Menuable trait
-                    $traits = $reflection->getTraits();
-                    if (array_key_exists(Menuable::class, $traits)) {
-
-                        $items = $className::all()->map(function ($item) use ($className) {
-                            return [
-                                'key' => $className.':'.$item->id,
-                                'value' => $item->{$className::getLabelKey()},
-                            ];
-                        });
-                        $models = array_merge($models, $items
-                        ->pluck('value', 'key')
-                        ->toArray());
-                    }
-                }
-            }
+        foreach ($this->modelPaths as $modelPath) {
+            $models = array_merge($models, $this->getModelsFromPath($modelPath));
         }
 
         return $models;
     }
 
     /**
-     * Extract namespace from a file path
-     * @param string $filePath
-     * @return string|null
+     * Get models from a specific path
      */
-    private function extractNamespace(string $filePath)
+    protected function getModelsFromPath(string $modelPath): array
     {
-        // Read the file content
-        $content = file_get_contents($filePath);
+        $items = [];
 
-        // Define the regular expression pattern to match the namespace declaration
-        $pattern = '/namespace\s+([a-zA-Z_][a-zA-Z0-9_\\\\]*)\s*;/';
+        foreach (glob($modelPath . '/*.php') as $file) {
+            $className = $this->reflectionService->getClassNameFromFile($file);
 
-        // Search for the namespace declaration in the file content
-        if (preg_match($pattern, $content, $matches)) {
-            // Return the captured namespace
-            return $matches[1];
+            if (class_exists($className) && $this->reflectionService->usesTrait($className, Menuable::class)) {
+                $items = array_merge($items, $this->getMenuableItems($className));
+            }
         }
 
-        // Return null if no namespace is found
-        return null;
+        return $items;
+    }
+
+    /**
+     * Get menuable items from a class
+     */
+    protected function getMenuableItems(string $className): array
+    {
+        return $className::all()->map(function ($item) use ($className) {
+            return [
+                'key' => $className . ':' . $item->id,
+                'value' => $item->{$className::getLabelKey()},
+            ];
+        })->pluck('value', 'key')->toArray();
     }
 }

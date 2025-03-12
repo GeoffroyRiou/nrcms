@@ -27,6 +27,7 @@ class MenuResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $menuService = app()->make(MenuService::class);
         return $form
             ->schema([
                 TextInput::make('title')
@@ -55,7 +56,7 @@ class MenuResource extends Resource
                             ->visible(fn(Get $get): bool => $get('type') == 'external_link'),
                         Select::make('page')
                             ->label(__('Page'))
-                            ->options((new MenuService)->getMenuableModels())
+                            ->options($menuService->getMenuableModels())
                             ->required()
                             ->searchable()
                             ->visible(fn(Get $get): bool => $get('type') == 'page')

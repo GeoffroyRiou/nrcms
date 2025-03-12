@@ -4,10 +4,25 @@ declare(strict_types=1);
 
 namespace GeoffroyRiou\NrCMS\Providers;
 
+use GeoffroyRiou\NrCMS\Services\MenuService;
+use GeoffroyRiou\NrCMS\Services\ReflectionService;
 use Illuminate\Support\ServiceProvider;
 
 class NrCMSServiceProvider extends ServiceProvider
 {
+
+    public function register(): void
+    {
+        // Bind the ReflectionService
+        $this->app->singleton(ReflectionService::class, function ($app) {
+            return new ReflectionService();
+        });
+
+        // Bind the MenuService
+        $this->app->singleton(MenuService::class, function ($app) {
+            return new MenuService($app->make(ReflectionService::class));
+        });
+    }
 
     public function boot(): void
     {
