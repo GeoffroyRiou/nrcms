@@ -46,11 +46,13 @@ class NrCMSServiceProvider extends ServiceProvider
         ], 'nrcms');
 
         /**
-         * Components
+         * Views
          */
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'nrcms');
+
         $this->publishes([
-            __DIR__ . '/../components' => resource_path('views/components'),
-        ], 'nrcms');
+            __DIR__.'/../resources/views' => resource_path('views/vendor/nrcms'),
+        ], ['nrcms','nrcms-views']);
 
         /**
          * Routes
