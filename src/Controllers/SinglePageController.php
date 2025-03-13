@@ -11,7 +11,6 @@ class SinglePageController extends Controller
     public function __invoke(string $slug): View
     {
         $page = Page::published()->where('slug', $slug)->firstOrFail();
-        dd($page);
-        return view('nrcms::single-page', compact('page'));
+        return view('nrcms::pages.single-page', compact('page'));
     }
 }

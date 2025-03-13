@@ -14,7 +14,7 @@ class Page extends Model
     protected $fillable = [
         'title',
         'slug',
-        'publish_status',
+        'published',
         'page_blocks',
         'parent_id',
         'sort',
