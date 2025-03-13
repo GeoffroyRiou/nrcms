@@ -11,7 +11,7 @@ class FAQBlock
 {
     public static function make(): Block
     {
-        return Block::make('page-builder.faq')
+        return Block::make('nrcms::page-builder.faq')
             ->label(__('FAQ'))
             ->icon('heroicon-o-question-mark-circle')
             ->schema([

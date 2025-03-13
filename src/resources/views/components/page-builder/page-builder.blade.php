@@ -1,7 +1,5 @@
 @use('Illuminate\View\ComponentAttributeBag')
-@php
-    $blocks = $model->page_blocks ?? [];
-@endphp
+
 @foreach($blocks as $block)
     @php
         $component = $block['type'];

@@ -6,6 +6,7 @@ namespace GeoffroyRiou\NrCMS\Providers;
 
 use GeoffroyRiou\NrCMS\Services\MenuService;
 use GeoffroyRiou\NrCMS\Services\ReflectionService;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class NrCMSServiceProvider extends ServiceProvider
@@ -48,6 +49,8 @@ class NrCMSServiceProvider extends ServiceProvider
         /**
          * Views
          */
+        Blade::componentNamespace('GeoffroyRiou\\NrCMS\\Views\\Components', 'nrcms');
+
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'nrcms');
 
         $this->publishes([
