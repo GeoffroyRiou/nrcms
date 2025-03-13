@@ -5,11 +5,12 @@ namespace GeoffroyRiou\NrCMS\Models;
 use GeoffroyRiou\NrCMS\Traits\Menuable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Page extends Model
 {
-    use Menuable;
+    use Menuable, HasRecursiveRelationships;
 
     protected $fillable = [
         'title',
@@ -27,8 +28,11 @@ class Page extends Model
     /**
      * Get the URL for the page.
      */
-    public function getUrl(): string{
-        return route('nrcms.page', ['slug' => $this->slug]);
+    public function getUrl(): string
+    {
+        $path = $this->ancestorsAndSelf()->pluck('slug')->reverse()->implode('/');
+
+        return route('nrcms.page', ['path' => $path]);
     }
 
     /**
@@ -37,10 +41,5 @@ class Page extends Model
     public function scopePublished(Builder $query): void
     {
         $query->where('published', true);
-    }
-
-    public function children(): HasMany
-    {
-        return $this->hasMany(Page::class, 'parent_id')->with('children')->orderBy('sort');
     }
 }

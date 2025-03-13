@@ -14,9 +14,10 @@ return [
     /**
      * Your models folders paths
      * (Used for the menus)
-     */ 
+     * ex: app_path('Models')
+     */
     'model_paths' => [
-        app_path('Models'),
+        //
     ],
 
     /**

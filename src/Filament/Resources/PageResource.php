@@ -2,9 +2,11 @@
 
 namespace GeoffroyRiou\NrCMS\Filament\Resources;
 
+use Filament\Forms\Components\Select;
 use GeoffroyRiou\NrCMS\Filament\Resources\PageResource\Pages;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -13,7 +15,6 @@ use GeoffroyRiou\NrCMS\Traits\IsCmsResource;
 use Filament\Forms\Set;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
-use Illuminate\Support\Str;
 
 class PageResource extends Resource
 {
@@ -27,17 +28,15 @@ class PageResource extends Resource
     protected static function getResourceFields(): array
     {
         return [
-            Toggle::make('published')
-                ->label(__('Published'))
-                ->columnSpanFull(),
-            TextInput::make('title')
-                ->label(__('Title'))
-                ->required()
-                ->afterStateUpdated(fn(Set $set, ?string $state) => $set('slug', Str::slug($state)))
-                ->live(onBlur: true),
-            TextInput::make('slug')
-                ->label(__('Slug'))
-                ->required(),
+            Select::make('parent_id')
+                ->label(__('Parent'))
+                ->options(function (Get $get) {
+                    return self::$model::query()
+                        ->where('id', '!=', $get('id'))
+                        ->get()
+                        ->pluck('title', 'id');
+                })
+                ->searchable(),
         ];
     }
 
@@ -45,9 +44,17 @@ class PageResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')->label(__('Title'))
+                TextColumn::make('title')
+                    ->label(__('Title'))
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('slug')
+                    ->label(__('Path'))
+                    ->formatStateUsing(function ($record): string {
+                        return $record->ancestorsAndSelf()->pluck('slug')->implode('/');
+                    })
+                    ->size(TextColumn\TextColumnSize::ExtraSmall)
+                    ->color('gray'),
                 ToggleColumn::make('published')
                     ->label(__('Published'))
                     ->sortable(),

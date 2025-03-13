@@ -31,9 +31,11 @@ class NrCMSServiceProvider extends ServiceProvider
         /**
          * Configuration
          */
+
         $this->publishes([
             __DIR__ . '/../config/nrcms.php' => config_path('nrcms.php'),
-        ], 'nrcms');
+        ], ['nrcms', 'nrcms-config']);
+
         $this->mergeConfigFrom(
             __DIR__ . '/../config/nrcms.php',
             'nrcms'
@@ -42,24 +44,27 @@ class NrCMSServiceProvider extends ServiceProvider
         /**
          * Migrations
          */
+
         $this->publishesMigrations([
             __DIR__ . '/../database/migrations' => database_path('migrations'),
-        ], 'nrcms');
+        ], ['nrcms', 'nrcms-migrations']);
 
         /**
          * Views
          */
+
         Blade::componentNamespace('GeoffroyRiou\\NrCMS\\Views\\Components', 'nrcms');
 
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'nrcms');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'nrcms');
 
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/nrcms'),
-        ], ['nrcms','nrcms-views']);
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/nrcms'),
+        ], ['nrcms', 'nrcms-views']);
 
         /**
          * Routes
          */
+
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
     }
 }

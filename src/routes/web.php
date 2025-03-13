@@ -5,4 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 $prefix = config('nrcms.page_url_prefix', 'pages');
 
-Route::get("/{$prefix}/{slug}", SinglePageController::class)->name('nrcms.page');
+
+Route::get("/{$prefix}/{path}", SinglePageController::class)
+    ->name('nrcms.page')
+    ->where('path', '.*');

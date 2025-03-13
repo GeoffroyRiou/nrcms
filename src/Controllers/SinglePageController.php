@@ -8,8 +8,10 @@ use Illuminate\View\View;
 
 class SinglePageController extends Controller
 {
-    public function __invoke(string $slug): View
+    public function __invoke(string $path): View
     {
+        $parts = explode('/', $path);
+        $slug = array_pop($parts);
         $page = Page::published()->where('slug', $slug)->firstOrFail();
         return view('nrcms::pages.single-page', compact('page'));
     }
