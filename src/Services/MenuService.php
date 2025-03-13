@@ -124,6 +124,7 @@ class MenuService
             $currentItem = [
                 'label' => $item['label'],
                 'url' => $url,
+                'blank' => $item['blank'] ?? false,
                 'children' => [],
             ];
 

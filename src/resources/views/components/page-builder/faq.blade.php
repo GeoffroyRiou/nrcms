@@ -6,7 +6,7 @@
 
         <div>
             @if (!empty($title))
-                <h2 class="text-2xl text-center">
+                <h2 class="text-2xl font-medium text-center">
                     {{ $title }}
                 </h2>
             @endif
@@ -20,7 +20,7 @@
 
         <div class="flex flex-col gap-3">
             @foreach ($questions as $question)
-                <details class="p-5 shadow-lg bg-white rounded-lg">
+                <details class="p-5 shadow bg-white rounded-lg">
                     <summary>
                         {{ $question['title'] }}
                     </summary>
