@@ -10,9 +10,16 @@ class SinglePageController extends Controller
 {
     public function __invoke(string $path): View
     {
-        $parts = explode('/', $path);
-        $slug = array_pop($parts);
-        $page = Page::published()->where('slug', $slug)->firstOrFail();
+        $page = Page::published()->where('slug', $$this->getSlug($path))->firstOrFail();
         return view('nrcms::pages.single-page', compact('page'));
+    }
+
+    /**
+     * Get the slug from the path.
+     */
+    private function getSlug(string $path): string
+    {
+        $parts = explode('/', $path);
+        return array_pop($parts);
     }
 }
