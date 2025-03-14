@@ -11,15 +11,7 @@ class Category extends Model
     use IsCmsModel, HasRecursiveRelationships;
 
     protected $fillable = [
-        'title',
-        'slug',
-        'published',
-        'page_blocks',
         'parent_id',
-    ];
-
-    protected $casts = [
-        'page_blocks' => 'array',
     ];
 
     public function getUrlPath(bool $includeSelf = true): string

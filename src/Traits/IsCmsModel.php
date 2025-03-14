@@ -12,6 +12,30 @@ trait IsCmsModel
     use Menuable;
 
     /**
+     * Initialize the IsCmsModel trait.
+     * Merge the fillable attributes with the default ones.
+     */
+    public function initializeIsCmsModel()
+    {
+        $this->fillable = array_merge(
+            $this->fillable,
+            [
+                'title',
+                'slug',
+                'published',
+                'page_blocks',
+            ]
+        );
+
+        $this->casts = array_merge(
+            $this->casts,
+            [
+                'page_blocks' => 'array',
+            ]
+        );
+    }
+
+    /**
      * Get the route name for the page.
      */
     public function getRouteName(): string
