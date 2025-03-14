@@ -52,10 +52,10 @@ class ArticleResource extends Resource
                 //
             ])
             ->actions([
-                Action::make('view')
+                Action::make('go')
                     ->label(__('View'))
                     ->icon('heroicon-o-eye')
-                    ->url(fn($record) => $record->getUrl()),                    
+                    ->url(fn($record) => $record->getUrl()),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

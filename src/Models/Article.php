@@ -23,7 +23,8 @@ class Article extends Model
         'page_blocks' => 'array',
     ];
 
-    public function getRouteName(): string{
-        return 'nrcms.article';
+    public function getViewName(): string
+    {
+        return 'nrcms::articles.single-article';
     }
 }

@@ -14,19 +14,25 @@ trait IsCmsModel
     /**
      * Get the route name for the page.
      */
-    abstract public function getRouteName(): string;
+    public function getRouteName(): string
+    {
+        return 'nrcms.cms_model';
+    }
+
+    /**
+     * Get the route name for the page.
+     */
+    abstract public function getViewName(): string;
 
     /**
      * Get the URL for the page.
      */
     public function getUrl(): string
     {
-        return route($this->getRouteName(), [
-            'path' => $this->getPath()
-        ]);
+        return url($this->getUrlPath());
     }
 
-    public function getPath(): string
+    public function getUrlPath(): string
     {
         return $this->slug;
     }

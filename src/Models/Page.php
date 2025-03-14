@@ -23,14 +23,15 @@ class Page extends Model
         'page_blocks' => 'array',
     ];
 
-    public function getPath(bool $includeSelf = true): string
+    public function getUrlPath(bool $includeSelf = true): string
     {
         $method = $includeSelf ? 'ancestorsAndSelf' : 'ancestors';
 
         return $this->$method()->pluck('slug')->reverse()->implode('/');
     }
 
-    public function getRouteName(): string{
-        return 'nrcms.page';
+    public function getViewName(): string
+    {
+        return 'nrcms::pages.single-page';
     }
 }

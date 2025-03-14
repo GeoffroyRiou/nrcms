@@ -9,7 +9,7 @@ use GeoffroyRiou\NrCMS\Services\ReflectionService;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
-class NrCMSServiceProvider extends ServiceProvider
+class NrCmsServiceProvider extends ServiceProvider
 {
 
     public function register(): void

@@ -23,45 +23,34 @@ class MenuService
      */
     public function getMenuableModels(): array
     {
-        $models = [];
+        $modelClasses = $this->reflectionService->getModelClassesFromPaths($this->modelPaths);
+        $menuableModels = [];
 
-        foreach ($this->modelPaths as $modelPath) {
-            $models = array_merge($models, $this->getModelsFromPath($modelPath));
-        }
-
-        return $models;
-    }
-
-    /**
-     * Get models from a specific path
-     */
-    protected function getModelsFromPath(string $modelPath): array
-    {
-        $items = [];
-
-        foreach (glob($modelPath . '/*.php') as $file) {
-            $className = $this->reflectionService->getClassNameFromFile($file);
-
-            if (class_exists($className) && (
-                $this->reflectionService->usesTrait($className, Menuable::class) ||
-                $this->reflectionService->usesTrait($className, IsCmsModel::class)
-            )) {
-                $items = array_merge($items, $this->getMenuableItems($className));
+        foreach ($modelClasses as $modelClass) {
+            if (
+                $this->reflectionService->usesTrait($modelClass, Menuable::class) ||
+                $this->reflectionService->usesTrait($modelClass, IsCmsModel::class)
+            ) {
+                $menuableModels = array_merge(
+                    $menuableModels,
+                    $this->getMenuableItems($modelClass),
+                );
             }
         }
 
-        return $items;
+
+        return $menuableModels;
     }
 
     /**
-     * Get menuable items from a class
+     * Get menuable items from a class (models instances)
      */
-    protected function getMenuableItems(string $className): array
+    protected function getMenuableItems(string $modelClasse): array
     {
-        return $className::all()->map(function ($item) use ($className) {
+        return $modelClasse::all()->map(function ($item) use ($modelClasse) {
             return [
-                'key' => $className . ':' . $item->id,
-                'value' => $item->{$className::getLabelKey()},
+                'key' => $modelClasse . ':' . $item->id,
+                'value' => $item->{$modelClasse::getLabelKey()},
             ];
         })->pluck('value', 'key')->toArray();
     }

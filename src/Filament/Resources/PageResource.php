@@ -57,9 +57,9 @@ class PageResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('slug')
-                    ->label(__('Parent.s'))
+                    ->label(__('Parent path'))
                     ->formatStateUsing(function ($record): string {
-                        return $record->getPath(includeSelf: false);
+                        return $record->getUrlPath(includeSelf: false);
                     })
                     ->size(TextColumn\TextColumnSize::ExtraSmall)
                     ->color('gray'),
@@ -71,10 +71,10 @@ class PageResource extends Resource
                 //
             ])
             ->actions([
-                Action::make('view')
+                Action::make('go')
                     ->label(__('View'))
                     ->icon('heroicon-o-eye')
-                    ->url(fn($record) => $record->getUrl()),                    
+                    ->url(fn($record) => $record->getUrl()),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

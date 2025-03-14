@@ -34,6 +34,27 @@ class ReflectionService
     }
 
     /**
+     * Get model classes from a specific path
+     */
+    public function getModelClassesFromPaths(array $modelsPaths): array
+    {
+        $modelClasses = [];
+
+        foreach ($modelsPaths as $modelsPath) {
+
+            foreach (glob($modelsPath . '/*.php') as $file) {
+                $className = $this->getClassNameFromFile($file);
+
+                if (class_exists($className)) {
+                    $modelClasses[] = $className;
+                }
+            }
+        }
+
+        return $modelClasses;
+    }
+
+    /**
      * Get the class name from a file path
      */
     public function getClassNameFromFile(string $filePath): string
