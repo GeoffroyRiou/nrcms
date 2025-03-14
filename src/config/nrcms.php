@@ -24,5 +24,11 @@ return [
      * Pages url prefix
      * ex: "pages"
      */
-    'page_url_prefix' => 'pages',
+    'pages_url_prefix' => 'pages',
+
+    /**
+     * Articles url prefix
+     * ex: "articles"
+     */
+    'articles_url_prefix' => 'articles',
 ];

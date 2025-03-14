@@ -2,6 +2,9 @@
 
 namespace GeoffroyRiou\NrCMS\Filament\Resources;
 
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Form;
 use GeoffroyRiou\NrCMS\Filament\Resources\ArticleResource\Pages;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -13,16 +16,23 @@ use GeoffroyRiou\NrCMS\Traits\IsCmsResource;
 
 class ArticleResource extends Resource
 {
-
     use IsCmsResource;
 
     protected static ?string $model = Article::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-bookmark';
 
-    protected static function getResourceFields(): array
+    public static function form(Form $form): Form
     {
-        return [];
+        return $form
+            ->schema([
+                Section::make('')->schema([
+                    self::getCmsSection()
+                        ->columnSpan(2),
+                    self::getIllustrationField()
+                ])->columns(3),
+                self::getPageBuilderSection(),
+            ]);
     }
 
     public static function table(Table $table): Table

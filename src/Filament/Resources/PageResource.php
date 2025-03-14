@@ -2,7 +2,10 @@
 
 namespace GeoffroyRiou\NrCMS\Filament\Resources;
 
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Form;
 use GeoffroyRiou\NrCMS\Filament\Resources\PageResource\Pages;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
@@ -23,19 +26,26 @@ class PageResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
 
-    protected static function getResourceFields(): array
+    public static function form(Form $form): Form
     {
-        return [
-            Select::make('parent_id')
-                ->label(__('Parent'))
-                ->options(function (Get $get) {
-                    return self::$model::query()
-                        ->where('id', '!=', $get('id'))
-                        ->get()
-                        ->pluck('title', 'id');
-                })
-                ->searchable(),
-        ];
+        return $form
+            ->schema([
+                Fieldset::make('')->schema([
+                    self::getCmsSection()
+                        ->columnSpan(2),
+                    Select::make('parent_id')
+                        ->label(__('Parent'))
+                        ->options(function (Get $get) {
+                            return self::$model::query()
+                                ->where('id', '!=', $get('id'))
+                                ->get()
+                                ->pluck('title', 'id');
+                        })
+                        ->searchable()
+                        ->columnSpan(1)
+                ])->columns(3),
+                self::getPageBuilderSection(),
+            ]);
     }
 
     public static function table(Table $table): Table

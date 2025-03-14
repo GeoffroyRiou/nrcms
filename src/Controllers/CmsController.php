@@ -3,12 +3,19 @@
 namespace GeoffroyRiou\NrCMS\Controllers;
 
 use App\Http\Controllers\Controller;
+use GeoffroyRiou\NrCMS\Models\Article;
 use GeoffroyRiou\NrCMS\Models\Page;
 use Illuminate\View\View;
 
-class SinglePageController extends Controller
+class CmsController extends Controller
 {
-    public function __invoke(string $path): View
+    public function article(string $path): View
+    {
+        $page = Article::published()->where('slug', $this->getSlug($path))->firstOrFail();
+        return view('nrcms::pages.single-page', compact('page'));
+    }
+
+    public function page(string $path): View
     {
         $page = Page::published()->where('slug', $this->getSlug($path))->firstOrFail();
         return view('nrcms::pages.single-page', compact('page'));

@@ -1,11 +1,16 @@
 <?php
 
-use GeoffroyRiou\NrCMS\Controllers\SinglePageController;
+use GeoffroyRiou\NrCMS\Controllers\CmsController;
 use Illuminate\Support\Facades\Route;
 
-$prefix = config('nrcms.page_url_prefix', 'pages');
+$prefixPages = config('nrcms.pages_url_prefix', 'pages');
+$prefixArticles = config('nrcms.articles_url_prefix', 'articles');
 
 
-Route::get("/{$prefix}/{path}", SinglePageController::class)
+Route::get("/{$prefixPages}/{path}", [CmsController::class,'page'])
     ->name('nrcms.page')
+    ->where('path', '.*');
+
+Route::get("/{$prefixArticles}/{path}", [CmsController::class,'article'])
+    ->name('nrcms.article')
     ->where('path', '.*');

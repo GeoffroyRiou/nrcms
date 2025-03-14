@@ -12,6 +12,7 @@ class Article extends Model
     protected $fillable = [
         'title',
         'slug',
+        'illustration',
         'published',
         'page_blocks',
         'parent_id',
