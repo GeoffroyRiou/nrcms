@@ -4,15 +4,13 @@ namespace GeoffroyRiou\NrCMS\Filament\Resources;
 
 use Filament\Forms\Components\Select;
 use GeoffroyRiou\NrCMS\Filament\Resources\PageResource\Pages;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use GeoffroyRiou\NrCMS\Models\Page;
 use GeoffroyRiou\NrCMS\Traits\IsCmsResource;
-use Filament\Forms\Set;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 
@@ -49,9 +47,9 @@ class PageResource extends Resource
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('slug')
-                    ->label(__('Path'))
+                    ->label(__('Parent.s'))
                     ->formatStateUsing(function ($record): string {
-                        return $record->ancestorsAndSelf()->pluck('slug')->implode('/');
+                        return $record->getPath(includeSelf: false);
                     })
                     ->size(TextColumn\TextColumnSize::ExtraSmall)
                     ->color('gray'),
@@ -65,6 +63,11 @@ class PageResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Action::make('view')
+                    ->label(__('View page'))
+                    ->icon('heroicon-o-eye')
+                    ->color('green')
+                    ->url(fn($record) => $record->getUrl()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

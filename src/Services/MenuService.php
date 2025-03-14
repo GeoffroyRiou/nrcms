@@ -6,6 +6,7 @@ namespace GeoffroyRiou\NrCMS\Services;
 
 use GeoffroyRiou\NrCMS\Models\Menu;
 use GeoffroyRiou\NrCMS\Traits\Menuable;
+use GeoffroyRiou\NrCMS\Traits\IsCmsModel;
 
 class MenuService
 {
@@ -41,7 +42,10 @@ class MenuService
         foreach (glob($modelPath . '/*.php') as $file) {
             $className = $this->reflectionService->getClassNameFromFile($file);
 
-            if (class_exists($className) && $this->reflectionService->usesTrait($className, Menuable::class)) {
+            if (class_exists($className) && (
+                $this->reflectionService->usesTrait($className, Menuable::class) ||
+                $this->reflectionService->usesTrait($className, IsCmsModel::class)
+            )) {
                 $items = array_merge($items, $this->getMenuableItems($className));
             }
         }

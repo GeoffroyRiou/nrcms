@@ -10,7 +10,7 @@ class SinglePageController extends Controller
 {
     public function __invoke(string $path): View
     {
-        $page = Page::published()->where('slug', $$this->getSlug($path))->firstOrFail();
+        $page = Page::published()->where('slug', $this->getSlug($path))->firstOrFail();
         return view('nrcms::pages.single-page', compact('page'));
     }
 

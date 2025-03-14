@@ -6,6 +6,7 @@ namespace GeoffroyRiou\NrCMS\Plugin;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use GeoffroyRiou\NrCMS\Filament\Resources\ArticleResource;
 use GeoffroyRiou\NrCMS\Filament\Resources\MenuResource;
 use GeoffroyRiou\NrCMS\Filament\Resources\PageResource;
 
@@ -22,6 +23,7 @@ class NrCMSPlugin implements Plugin
         $panel
             ->resources([
                 PageResource::class,
+                ArticleResource::class,
                 MenuResource::class,
             ])
             ->pages([

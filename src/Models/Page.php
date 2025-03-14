@@ -2,15 +2,13 @@
 
 namespace GeoffroyRiou\NrCMS\Models;
 
-use GeoffroyRiou\NrCMS\Traits\Menuable;
-use Illuminate\Database\Eloquent\Builder;
+use GeoffroyRiou\NrCMS\Traits\IsCmsModel;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 class Page extends Model
 {
-    use Menuable, HasRecursiveRelationships;
+    use IsCmsModel, HasRecursiveRelationships;
 
     protected $fillable = [
         'title',
@@ -25,21 +23,10 @@ class Page extends Model
         'page_blocks' => 'array',
     ];
 
-    /**
-     * Get the URL for the page.
-     */
-    public function getUrl(): string
+    public function getPath(bool $includeSelf = true): string
     {
-        $path = $this->ancestorsAndSelf()->pluck('slug')->reverse()->implode('/');
+        $method = $includeSelf ? 'ancestorsAndSelf' : 'ancestors';
 
-        return route('nrcms.page', ['path' => $path]);
-    }
-
-    /**
-     * Scope a query to only include published pages.
-     */
-    public function scopePublished(Builder $query): void
-    {
-        $query->where('published', true);
+        return $this->$method()->pluck('slug')->reverse()->implode('/');
     }
 }
