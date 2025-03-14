@@ -29,4 +29,8 @@ class Page extends Model
 
         return $this->$method()->pluck('slug')->reverse()->implode('/');
     }
+
+    public function getRouteName(): string{
+        return 'nrcms.page';
+    }
 }

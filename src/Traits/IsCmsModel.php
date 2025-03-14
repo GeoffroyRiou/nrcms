@@ -11,14 +11,17 @@ trait IsCmsModel
 
     use Menuable;
 
-    private string $routeName = 'nrcms.page';
+    /**
+     * Get the route name for the page.
+     */
+    abstract public function getRouteName(): string;
 
     /**
      * Get the URL for the page.
      */
     public function getUrl(): string
     {
-        return route($this->routeName, [
+        return route($this->getRouteName(), [
             'path' => $this->getPath()
         ]);
     }

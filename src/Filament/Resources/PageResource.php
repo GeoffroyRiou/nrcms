@@ -71,13 +71,12 @@ class PageResource extends Resource
                 //
             ])
             ->actions([
+                Action::make('view')
+                    ->label(__('View'))
+                    ->icon('heroicon-o-eye')
+                    ->url(fn($record) => $record->getUrl()),                    
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-                Action::make('view')
-                    ->label(__('View page'))
-                    ->icon('heroicon-o-eye')
-                    ->color('green')
-                    ->url(fn($record) => $record->getUrl()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

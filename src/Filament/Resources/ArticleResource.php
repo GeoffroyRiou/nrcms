@@ -8,6 +8,7 @@ use Filament\Forms\Form;
 use GeoffroyRiou\NrCMS\Filament\Resources\ArticleResource\Pages;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
@@ -51,7 +52,12 @@ class ArticleResource extends Resource
                 //
             ])
             ->actions([
+                Action::make('view')
+                    ->label(__('View'))
+                    ->icon('heroicon-o-eye')
+                    ->url(fn($record) => $record->getUrl()),                    
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

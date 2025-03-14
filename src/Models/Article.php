@@ -22,4 +22,8 @@ class Article extends Model
     protected $casts = [
         'page_blocks' => 'array',
     ];
+
+    public function getRouteName(): string{
+        return 'nrcms.article';
+    }
 }
