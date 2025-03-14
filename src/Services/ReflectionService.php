@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GeoffroyRiou\NrCMS\Services;
+namespace GeoffroyRiou\NrCms\Services;
 
 use ReflectionClass;
 

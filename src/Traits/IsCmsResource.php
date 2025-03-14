@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GeoffroyRiou\NrCMS\Traits;
+namespace GeoffroyRiou\NrCms\Traits;
 
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -10,7 +10,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
-use GeoffroyRiou\NrCMS\Fields\PageBuilder;
+use GeoffroyRiou\NrCms\Fields\PageBuilder;
 use Illuminate\Support\Str;
 
 trait IsCmsResource
@@ -43,17 +43,18 @@ trait IsCmsResource
             ]);
     }
 
-    public static function getIllustrationField(): FileUpload{
+    public static function getIllustrationField(): FileUpload
+    {
         return FileUpload::make('illustration')
             ->label(__('Illustration'))
             ->image()
-            ->maxSize(5*1024)
+            ->maxSize(5 * 1024)
             ->imagePreviewHeight('250')
-    ->loadingIndicatorPosition('left')
-    ->panelAspectRatio('2:1.2')
-    ->panelLayout('integrated')
-    ->removeUploadedFileButtonPosition('right')
-    ->uploadButtonPosition('left')
-    ->uploadProgressIndicatorPosition('left');
+            ->loadingIndicatorPosition('left')
+            ->panelAspectRatio('2:1.2')
+            ->panelLayout('integrated')
+            ->removeUploadedFileButtonPosition('right')
+            ->uploadButtonPosition('left')
+            ->uploadProgressIndicatorPosition('left');
     }
 }

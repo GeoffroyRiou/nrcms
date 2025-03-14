@@ -1,9 +1,9 @@
 <?php
 
-namespace GeoffroyRiou\NrCMS\Fields;
+namespace GeoffroyRiou\NrCms\Fields;
 
 use Filament\Forms\Components\Builder;
-use GeoffroyRiou\NrCMS\Services\BlocksService;
+use GeoffroyRiou\NrCms\Services\BlocksService;
 
 class PageBuilder extends Builder
 {

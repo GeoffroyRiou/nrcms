@@ -1,10 +1,10 @@
 <?php
 
-namespace GeoffroyRiou\NrCMS\Views\Components;
+namespace GeoffroyRiou\NrCms\Views\Components;
 
 use Closure;
-use GeoffroyRiou\NrCMS\Models\Menu as MenuModel;
-use GeoffroyRiou\NrCMS\Services\MenuService;
+use GeoffroyRiou\NrCms\Models\Menu as MenuModel;
+use GeoffroyRiou\NrCms\Services\MenuService;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
@@ -29,8 +29,8 @@ class Menu extends Component
         if (!$this->menu) {
             return '';
         }
-        
-        return view('nrcms::components.menu.menu',[
+
+        return view('nrcms::components.menu.menu', [
             'items' => $this->menuService->hydrateMenu($this->menu->items)
         ]);
     }

@@ -1,19 +1,19 @@
 <?php
 
-namespace GeoffroyRiou\NrCMS\Filament\Resources;
+namespace GeoffroyRiou\NrCms\Filament\Resources;
 
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
-use GeoffroyRiou\NrCMS\Filament\Resources\ArticleResource\Pages;
+use GeoffroyRiou\NrCms\Filament\Resources\ArticleResource\Pages;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
-use GeoffroyRiou\NrCMS\Models\Article;
-use GeoffroyRiou\NrCMS\Traits\IsCmsResource;
+use GeoffroyRiou\NrCms\Models\Article;
+use GeoffroyRiou\NrCms\Traits\IsCmsResource;
 
 class ArticleResource extends Resource
 {

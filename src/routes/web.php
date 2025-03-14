@@ -1,6 +1,6 @@
 <?php
 
-use GeoffroyRiou\NrCMS\Controllers\CmsController;
+use GeoffroyRiou\NrCms\Controllers\CmsController;
 use Illuminate\Support\Facades\Route;
 
 

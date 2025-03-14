@@ -1,8 +1,8 @@
 <?php
 
-namespace GeoffroyRiou\NrCMS\Filament\Resources\PageResource\Pages;
+namespace GeoffroyRiou\NrCms\Filament\Resources\PageResource\Pages;
 
-use GeoffroyRiou\NrCMS\Filament\Resources\PageResource;
+use GeoffroyRiou\NrCms\Filament\Resources\PageResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 

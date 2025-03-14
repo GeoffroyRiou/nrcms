@@ -15,7 +15,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "GeoffroyRiou\\NrCMS\\": "src/"
+            "GeoffroyRiou\\NrCms\\": "src/"
         }
     },
     "authors": [

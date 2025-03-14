@@ -2,15 +2,17 @@
 
 declare(strict_types=1);
 
-namespace GeoffroyRiou\NrCMS\Traits;
+namespace GeoffroyRiou\NrCms\Traits;
 
 trait Menuable
 {
-    public static function getModelLabel(): string{
+    public static function getModelLabel(): string
+    {
         return __('Page');
     }
-    
-    public static function getLabelKey(): string{
+
+    public static function getLabelKey(): string
+    {
         return 'title';
     }
 

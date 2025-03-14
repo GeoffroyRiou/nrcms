@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace GeoffroyRiou\NrCMS\Plugin;
+namespace GeoffroyRiou\NrCms\Plugin;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use GeoffroyRiou\NrCMS\Filament\Resources\ArticleResource;
-use GeoffroyRiou\NrCMS\Filament\Resources\MenuResource;
-use GeoffroyRiou\NrCMS\Filament\Resources\PageResource;
+use GeoffroyRiou\NrCms\Filament\Resources\ArticleResource;
+use GeoffroyRiou\NrCms\Filament\Resources\MenuResource;
+use GeoffroyRiou\NrCms\Filament\Resources\PageResource;
 
-class NrCMSPlugin implements Plugin
+class NrCmsPlugin implements Plugin
 {
 
     public function getId(): string
@@ -30,10 +30,9 @@ class NrCMSPlugin implements Plugin
                 //
             ]);
     }
- 
+
     public function boot(Panel $panel): void
     {
         //
     }
-
 }

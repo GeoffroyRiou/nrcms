@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GeoffroyRiou\NrCMS\Traits;
+namespace GeoffroyRiou\NrCms\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace GeoffroyRiou\NrCMS\Models;
+namespace GeoffroyRiou\NrCms\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

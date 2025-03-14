@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace GeoffroyRiou\NrCMS\Providers;
+namespace GeoffroyRiou\NrCms\Providers;
 
-use GeoffroyRiou\NrCMS\Services\MenuService;
-use GeoffroyRiou\NrCMS\Services\ReflectionService;
+use GeoffroyRiou\NrCms\Services\MenuService;
+use GeoffroyRiou\NrCms\Services\ReflectionService;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -53,7 +53,7 @@ class NrCmsServiceProvider extends ServiceProvider
          * Views
          */
 
-        Blade::componentNamespace('GeoffroyRiou\\NrCMS\\Views\\Components', 'nrcms');
+        Blade::componentNamespace('GeoffroyRiou\\NrCms\\Views\\Components', 'nrcms');
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'nrcms');
 

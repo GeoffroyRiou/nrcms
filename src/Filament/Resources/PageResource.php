@@ -1,18 +1,18 @@
 <?php
 
-namespace GeoffroyRiou\NrCMS\Filament\Resources;
+namespace GeoffroyRiou\NrCms\Filament\Resources;
 
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
-use GeoffroyRiou\NrCMS\Filament\Resources\PageResource\Pages;
+use GeoffroyRiou\NrCms\Filament\Resources\PageResource\Pages;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use GeoffroyRiou\NrCMS\Models\Page;
-use GeoffroyRiou\NrCMS\Traits\IsCmsResource;
+use GeoffroyRiou\NrCms\Models\Page;
+use GeoffroyRiou\NrCms\Traits\IsCmsResource;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;

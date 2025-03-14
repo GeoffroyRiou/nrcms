@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace GeoffroyRiou\NrCMS\Controllers;
+namespace GeoffroyRiou\NrCms\Controllers;
 
-use GeoffroyRiou\NrCMS\Controllers\CmsController;
-use GeoffroyRiou\NrCMS\Models\Article;
+use GeoffroyRiou\NrCms\Controllers\CmsController;
+use GeoffroyRiou\NrCms\Models\Article;
 use Illuminate\View\View;
 
-class ArticleController extends CmsController{
+class ArticleController extends CmsController
+{
 
     public function __invoke(string $path): View
     {

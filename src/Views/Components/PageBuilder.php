@@ -1,6 +1,6 @@
 <?php
 
-namespace GeoffroyRiou\NrCMS\Views\Components;
+namespace GeoffroyRiou\NrCms\Views\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;

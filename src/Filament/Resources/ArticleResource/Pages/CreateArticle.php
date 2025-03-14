@@ -1,8 +1,8 @@
 <?php
 
-namespace GeoffroyRiou\NrCMS\Filament\Resources\ArticleResource\Pages;
+namespace GeoffroyRiou\NrCms\Filament\Resources\ArticleResource\Pages;
 
-use GeoffroyRiou\NrCMS\Filament\Resources\ArticleResource;
+use GeoffroyRiou\NrCms\Filament\Resources\ArticleResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 

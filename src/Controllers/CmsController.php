@@ -1,11 +1,11 @@
 <?php
 
-namespace GeoffroyRiou\NrCMS\Controllers;
+namespace GeoffroyRiou\NrCms\Controllers;
 
 use App\Http\Controllers\Controller;
-use GeoffroyRiou\NrCMS\Services\ReflectionService;
+use GeoffroyRiou\NrCms\Services\ReflectionService;
 use Illuminate\View\View;
-use GeoffroyRiou\NrCMS\Traits\IsCmsModel;
+use GeoffroyRiou\NrCms\Traits\IsCmsModel;
 use Illuminate\Database\Eloquent\Model;
 
 class CmsController extends Controller

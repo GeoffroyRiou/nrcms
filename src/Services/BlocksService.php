@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GeoffroyRiou\NrCMS\Services;
+namespace GeoffroyRiou\NrCms\Services;
 
 use Illuminate\Support\Facades\File;
 
@@ -60,7 +60,7 @@ class BlocksService
     {
         $blocks = [];
         foreach (glob("{$path}/*.php") as $file) {
-            $className = 'GeoffroyRiou\\NrCMS\\Blocks\\' . basename($file, '.php');
+            $className = 'GeoffroyRiou\\NrCms\\Blocks\\' . basename($file, '.php');
             $blocks[] = $className::make();
         }
         return $blocks;
@@ -71,7 +71,7 @@ class BlocksService
      * @param array $files
      * @param string $namespace
      * @return array
-     */ 
+     */
     protected function loadBlocksFromFiles(array $files, string $namespace): array
     {
         $blocks = [];

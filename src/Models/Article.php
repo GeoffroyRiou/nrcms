@@ -1,8 +1,8 @@
 <?php
 
-namespace GeoffroyRiou\NrCMS\Models;
+namespace GeoffroyRiou\NrCms\Models;
 
-use GeoffroyRiou\NrCMS\Traits\IsCmsModel;
+use GeoffroyRiou\NrCms\Traits\IsCmsModel;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace GeoffroyRiou\NrCMS\Services;
+namespace GeoffroyRiou\NrCms\Services;
 
-use GeoffroyRiou\NrCMS\Models\Menu;
-use GeoffroyRiou\NrCMS\Traits\Menuable;
-use GeoffroyRiou\NrCMS\Traits\IsCmsModel;
+use GeoffroyRiou\NrCms\Models\Menu;
+use GeoffroyRiou\NrCms\Traits\Menuable;
+use GeoffroyRiou\NrCms\Traits\IsCmsModel;
 
 class MenuService
 {

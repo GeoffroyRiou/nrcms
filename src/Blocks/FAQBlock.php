@@ -1,6 +1,6 @@
 <?php
 
-namespace GeoffroyRiou\NrCMS\Blocks;
+namespace GeoffroyRiou\NrCms\Blocks;
 
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Repeater;

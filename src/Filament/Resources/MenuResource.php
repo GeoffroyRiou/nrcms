@@ -1,13 +1,13 @@
 <?php
 
-namespace GeoffroyRiou\NrCMS\Filament\Resources;
+namespace GeoffroyRiou\NrCms\Filament\Resources;
 
 use Dom\Text;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\ToggleButtons;
-use GeoffroyRiou\NrCMS\Filament\Resources\MenuResource\Pages;
+use GeoffroyRiou\NrCms\Filament\Resources\MenuResource\Pages;
 
 use Filament\Forms\Form;
 use Filament\Forms\Get;
@@ -15,8 +15,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use GeoffroyRiou\NrCMS\Models\Menu;
-use GeoffroyRiou\NrCMS\Services\MenuService;
+use GeoffroyRiou\NrCms\Models\Menu;
+use GeoffroyRiou\NrCms\Services\MenuService;
 use Saade\FilamentAdjacencyList\Forms\Components\AdjacencyList;
 
 class MenuResource extends Resource
