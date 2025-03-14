@@ -32,6 +32,9 @@ trait IsCmsModel
         return url($this->getUrlPath());
     }
 
+    /**
+     * Get the URL path for the page.
+     */
     public function getUrlPath(): string
     {
         return $this->slug;

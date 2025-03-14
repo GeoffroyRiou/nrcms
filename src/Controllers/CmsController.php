@@ -56,7 +56,7 @@ class CmsController extends Controller
                 continue;
             }
 
-            $query = $modelClass::where('slug', $slug);
+            $query = $modelClass::published()->where('slug', $slug);
 
             if ($query->exists()) {
                 return $query->first();
