@@ -3,42 +3,53 @@
 namespace GeoffroyRiou\NrCms\Filament\Resources;
 
 use Filament\Forms\Components\Fieldset;
-use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use GeoffroyRiou\NrCms\Filament\Resources\CategoryResource\Pages;
 use Filament\Forms\Form;
-use GeoffroyRiou\NrCms\Filament\Resources\ArticleResource\Pages;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
-use GeoffroyRiou\NrCms\Models\Article;
 use GeoffroyRiou\NrCms\Models\Category;
 use GeoffroyRiou\NrCms\Traits\IsCmsResource;
 
-class ArticleResource extends Resource
+class CategoryResource extends Resource
 {
+
     use IsCmsResource;
 
-    protected static ?string $model = Article::class;
+    protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-bookmark';
+    protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Article categories');
+    }
+    public static function getModelLabel(): string
+    {
+        return __('Article categories');
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Section::make('')->schema([
+                Fieldset::make('')->schema([
                     self::getCmsSection()
                         ->columnSpan(2),
-                    Fieldset::make('')->schema([
-
-                        self::getIllustrationField()
-                            ->panelAspectRatio('2:0.6'),
-                        self::getParentSelectionField(self::$model, Category::class, 'category_id')
-                            ->columnSpan(1)
-                    ])
-                        ->columns(1)
+                    Select::make('parent_id')
+                        ->label(__('Parent'))
+                        ->options(function (Get $get) {
+                            return self::$model::query()
+                                ->where('id', '!=', $get('id'))
+                                ->get()
+                                ->pluck('title', 'id');
+                        })
+                        ->searchable()
                         ->columnSpan(1)
                 ])->columns(3),
                 self::getPageBuilderSection(),
@@ -53,6 +64,13 @@ class ArticleResource extends Resource
                     ->label(__('Title'))
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('slug')
+                    ->label(__('Parent path'))
+                    ->formatStateUsing(function ($record): string {
+                        return $record->getUrlPath(includeSelf: false);
+                    })
+                    ->size(TextColumn\TextColumnSize::ExtraSmall)
+                    ->color('gray'),
                 ToggleColumn::make('published')
                     ->label(__('Published'))
                     ->sortable(),
@@ -85,9 +103,9 @@ class ArticleResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListArticles::route('/'),
-            'create' => Pages\CreateArticle::route('/create'),
-            'edit' => Pages\EditArticle::route('/{record}/edit'),
+            'index' => Pages\ListCategories::route('/'),
+            'create' => Pages\CreateCategory::route('/create'),
+            'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
     }
 }

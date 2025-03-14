@@ -6,11 +6,14 @@ namespace GeoffroyRiou\NrCms\Traits;
 
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Forms\Set;
 use GeoffroyRiou\NrCms\Fields\PageBuilder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
 trait IsCmsResource
@@ -56,5 +59,21 @@ trait IsCmsResource
             ->removeUploadedFileButtonPosition('right')
             ->uploadButtonPosition('left')
             ->uploadProgressIndicatorPosition('left');
+    }
+
+    public static function getParentSelectionField(string $modelClass, string $parentModelClass, string $parentKey = 'parent_id', string $labelKey = 'title'): Select
+    {
+        return Select::make($parentKey)
+            ->label(__('Parent'))
+            ->options(function (Get $get) use ($modelClass, $parentModelClass, $labelKey) {
+
+                return $parentModelClass::query()
+                    ->when($modelClass === $parentModelClass, function (Builder $query) use ($get) {
+                        return $query->where('id', '!=', $get('id'));
+                    })
+                    ->get()
+                    ->pluck($labelKey, 'id');
+            })
+            ->searchable();
     }
 }

@@ -33,15 +33,7 @@ class PageResource extends Resource
                 Fieldset::make('')->schema([
                     self::getCmsSection()
                         ->columnSpan(2),
-                    Select::make('parent_id')
-                        ->label(__('Parent'))
-                        ->options(function (Get $get) {
-                            return self::$model::query()
-                                ->where('id', '!=', $get('id'))
-                                ->get()
-                                ->pluck('title', 'id');
-                        })
-                        ->searchable()
+                    self::getParentSelectionField(self::$model, self::$model)
                         ->columnSpan(1)
                 ])->columns(3),
                 self::getPageBuilderSection(),

@@ -4,6 +4,7 @@ namespace GeoffroyRiou\NrCms\Models;
 
 use GeoffroyRiou\NrCms\Traits\IsCmsModel;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Article extends Model
 {
@@ -15,7 +16,7 @@ class Article extends Model
         'illustration',
         'published',
         'page_blocks',
-        'parent_id',
+        'category_id',
         'sort',
     ];
 
@@ -26,5 +27,24 @@ class Article extends Model
     public function getViewName(): string
     {
         return 'nrcms::articles.single-article';
+    }
+
+    public function getUrlPath(): string
+    {
+        return $this->ancestors()
+            ->pluck('slug')
+            ->reverse()
+            ->push($this->slug)
+            ->implode('/');
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class)->with('ancestorsAndSelf');
+    }
+
+    public function ancestors()
+    {
+        return $this->category->ancestorsAndSelf;
     }
 }
